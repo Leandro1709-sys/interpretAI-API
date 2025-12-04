@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba de API Médica con IA</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f3f3f3; }
+    textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+    select, button { padding: 10px; margin-top: 10px; }
+    .respuesta { margin-top: 20px; padding: 20px; background: #fff; border-radius: 6px; box-shadow: 0 0 5px #ccc; }
+  </style>
+</head>
+<body>
+  <h2>🧠 Consulta a la IA médica</h2>
+
+  <label for="endpoint">Elegí una función:</label><br>
+  <select id="endpoint">
+    <option value="completar-evolucion">Completar evolución</option>
+    <option value="resumir-historia">Resumir historia</option>
+    <option value="alertas-clinicas">Detectar alertas clínicas</option>
+    <option value="clasificar-diagnostico">Clasificar diagnóstico</option>
+    <option value="sugerir-estudios">Sugerir estudios</option>
+  </select>
+
+  <br><br>
+
+  <label for="jsonInput">Pegá aquí los datos del paciente (JSON):</label><br>
+  <textarea id="jsonInput">
+{
+  "Paciente": "Laura Gómez, 42 años",
+  "MotivoConsulta": "Dolor abdominal agudo",
+  "Síntomas": ["Fiebre", "Náuseas", "Vómitos", "Dolor en FID"],
+  "SignosVitales": {
+    "Temperatura": "38.2°C",
+    "FC": 98,
+    "PA": "125/80"
+  },
+  "ExamenFísico": "Blumberg positivo, defensa en FID",
+  "Antecedentes": ["Colelitiasis"],
+  "Medicación": "Paracetamol"
+}
+  </textarea>
+
+  <button onclick="enviar()">Consultar IA</button>
+
+  <div class="respuesta" id="respuesta"></div>
+
+  <script>
+    async function enviar() {
+      const endpoint = document.getElementById("endpoint").value;
+      const jsonInput = document.getElementById("jsonInput").value;
+
+      let parsedData;
+      try {
+        parsedData = JSON.parse(jsonInput);
+      } catch (e) {
+        alert("⚠️ El JSON no está bien formado");
+        return;
+      }
+
+      const res = await fetch(`http://localhost:3000/${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer mitokenultrasecreto"
+        },
+        body: JSON.stringify(parsedData)
+      });
+
+      if (!res.ok) {
+        document.getElementById("respuesta").innerHTML = "<strong style='color:red;'>Error al consultar la API.</strong>";
+        return;
+      }
+
+      const data = await res.json();
+
+      // Muestra el primer valor del objeto de respuesta (independientemente del endpoint)
+      const html = Object.values(data)[0];
+      document.getElementById("respuesta").innerHTML = html;
+    }
+  </script>
+</body>
+</html>

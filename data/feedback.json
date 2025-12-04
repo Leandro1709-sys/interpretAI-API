@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1764857252342",
+    "type": "like",
+    "comment": null,
+    "timestamp": "2025-12-04T14:07:32.342Z",
+    "ip": "::1"
+  },
+  {
+    "id": "1764859728257",
+    "type": "dislike",
+    "comment": null,
+    "timestamp": "2025-12-04T14:48:48.257Z",
+    "ip": "::1"
+  },
+  {
+    "id": "1764859740222",
+    "type": "like",
+    "comment": null,
+    "timestamp": "2025-12-04T14:49:00.222Z",
+    "ip": "::1"
+  }
+]
