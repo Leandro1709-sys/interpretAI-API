@@ -1,12 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import evolucionRoutes from "./routes/evolucion.js";
-import resumenRoutes from "./routes/resumen.js";
-import alertasRoutes from "./routes/alertas.js";
-import clasificacionRoutes from "./routes/clasificacion.js";
-import authMiddleware from "./middleware/auth.js";
-import estudiosRoutes from "./routes/estudios.js";
-import Zismed from "./routes/Zismed.js";
+
 import interpretaRoutes from "./routes/interpreta.js"; // Aquí importas tu archivo de rutas de interprete
 import feedbackRoutes from "./routes/feedback.js"; // Ruta para feedback
 import cors from "cors";

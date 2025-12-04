@@ -25,7 +25,7 @@ async function readFeedbacks() {
 
 // Función para escribir feedbacks
 async function writeFeedbacks(feedbacks) {
-  // Asegurar que el directorio existe
+  // Asegurar que el directorio existegit status
   const dataDir = path.dirname(feedbackFilePath);
   await fs.mkdir(dataDir, { recursive: true });
   
